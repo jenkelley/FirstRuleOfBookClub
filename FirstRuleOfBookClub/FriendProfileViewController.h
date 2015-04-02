@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  FriendProfileViewController.h
 //  FirstRuleOfBookClub
 //
 //  Created by Jen Kelley on 4/1/15.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface FriendProfileViewController : UIViewController
 
 @end
-
