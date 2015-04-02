@@ -60,15 +60,15 @@
     ftv.moc = [AppDelegate appDelegate].managedObjectContext;
 
     if ([tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryNone) {
-    [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
-        friendObject.friendBool = @"yes";
+        [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
+        friendObject.friendBool = @YES;
 
         //this is a loosing battle but I don't easily admit defeat
        // [friendObject.friends setByAddingObject:friendObject];
 
     } else if ([tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryCheckmark){
         [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
-        friendObject.friendBool = @"no";
+        friendObject.friendBool = @NO;//[NSNumber numberWithBool:friendObject.friendBool.boolValue];;
 
     }
 

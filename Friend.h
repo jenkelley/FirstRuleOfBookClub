@@ -15,7 +15,7 @@
 
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSData * picture;
-@property (nonatomic, retain) NSString * friendBool;
+@property (nonatomic, retain) NSNumber * friendBool;
 @property (nonatomic, retain) NSSet *book;
 @end
 

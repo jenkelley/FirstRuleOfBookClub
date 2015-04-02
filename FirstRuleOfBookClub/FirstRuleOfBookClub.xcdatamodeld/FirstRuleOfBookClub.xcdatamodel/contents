@@ -11,14 +11,14 @@
         <relationship name="book" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Book" inverseName="comment" inverseEntity="Book" syncable="YES"/>
     </entity>
     <entity name="Friend" representedClassName="Friend" syncable="YES">
-        <attribute name="friend" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="friendBool" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="picture" optional="YES" attributeType="Binary" syncable="YES"/>
         <relationship name="book" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Book" inverseName="friend" inverseEntity="Book" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Friend" positionX="-153" positionY="-171" width="128" height="103"/>
-        <element name="Comment" positionX="-272" positionY="117" width="128" height="73"/>
         <element name="Book" positionX="-36" positionY="18" width="128" height="103"/>
+        <element name="Comment" positionX="-272" positionY="117" width="128" height="73"/>
+        <element name="Friend" positionX="-153" positionY="-171" width="128" height="105"/>
     </elements>
 </model>

@@ -13,7 +13,8 @@
 
 @interface FriendsTableViewController ()
 @property Friend *person;
-@property NSArray *friendArray;
+@property NSArray *PersonArray;
+@property NSArray *friendsArray;
 @end
 
 @implementation FriendsTableViewController
@@ -23,41 +24,54 @@
 
     self.moc = [AppDelegate appDelegate].managedObjectContext;
 
-    self.friendArray = [NSArray new];
+    self.PersonArray = [NSArray new];
         [Friend getAllMyFriends:^(NSArray *peopleArray) {
-        self.friendArray = peopleArray;
+        self.PersonArray = peopleArray;
         NSLog(@"you have friends");
-            [self loadFriends];
+  //          [self loadPeople];
             [self.tableView reloadData];
-
         }];
+}
 
+-(void)viewWillAppear:(BOOL)animated{
+    [self loadFriends];
 
 }
 
 //I'm doing this here because if a friend is deleted, their comments and books will still be saved.
--(void)loadFriends{
+//REFACTOR:move this to listofpeopletableviewcontroller
+-(void)loadPeople{
 
-    for (NSString *personName in self.friendArray) {
+    for (NSString *personName in self.PersonArray) {
         Friend *friend = [NSEntityDescription insertNewObjectForEntityForName:@"Friend" inManagedObjectContext:self.moc];
         [friend setValue:personName forKey:@"name"];
-        [friend setValue:@"no" forKey:@"friend"];
-            [self.moc save:nil];
+        [friend setValue:@NO forKey:@"friendBool"];
+        [self.moc save:nil];
     }
+}
 
+- (void)loadFriends
+{
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([Friend class])];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"friendBool == YES"];
+    request.predicate = predicate;
+    self.friendsArray = [self.moc executeFetchRequest:request error:nil];
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return self.friendArray.count;
+    return self.friendsArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    Friend *friend = self.friendsArray[indexPath.row];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendCell" forIndexPath:indexPath];
     
-    cell.textLabel.text = self.friendArray[indexPath.row];
+    cell.textLabel.text = friend.name;
     
     return cell;
 }
